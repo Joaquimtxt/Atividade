@@ -450,7 +450,7 @@ const exercicio21 = () => {
   let corte = valor.split(" ");
 
   if (valor == "") {
-    erro.innerText = "Coloque uma palavra!";
+    erro.innerText = "Preencha os espaços!";
   } else {
     resultado.innerText = `${corte.join("")}`;
   }
