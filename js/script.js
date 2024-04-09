@@ -85,7 +85,7 @@ const exercicio5 = () => {
   }
 
   while (y <= numero) {
-    if (y % 2 != 0) {
+    if (y % 2 != 0) {//Se o número dividido 2 ter resto dif. de zero, irá 
       resultado.innerHTML += `<h3> # ${y} </h3>`;
       erro.innerText = "";
     }
@@ -106,12 +106,12 @@ const exercicio6 = () => {
     erro.innerText = "Coloque um número positivo e diferente de zero!";
   }
   while (m <= numero) {
-    if (m % 2 == 0) {
-      soma += m;
+    if (m % 2 == 0) {//Se o resto da divisão por 2, for 0, significa que ele é um número par
+      soma += m;//E quando for assim, salva o valor de m na var soma
       resultado.innerHTML = `<h3> A soma é igual:${soma} </h3>`;
       erro.innerText = "";
     }
-    m++;
+    m++;//Aqui ele vai se somando até ultrapassar o valor de número
   }
 };
 
@@ -139,9 +139,11 @@ const exercicio8 = () => {
     resultado.innerText = "";
 
     for (let i = palavra.length; i >= 0; i--) {
-      palavraInv.push(palavra[i]);
+      palavraInv.push(palavra[i]);//Conforme o i diminui, um indice diferente da palavra é colocado na var palavraInv
+      //como está indo de traz para frente, isso faz com que salve a palavra ao contrário
     }
-    if (palavra.join("") == palavraInv.join("")) {
+    if (palavra.join("") == palavraInv.join("")) {// aqui junta os índices do array em uma coisa só
+      //Formando assim a palavra de novo, e o inverso dela, e o if os compara, se a junção for igual, a palavra É um palíndromo
       resultado.innerHTML = "<h3>Esta palavra é um palíndromo</h3>";
       erro.innerText = "";
     } else if (palavra !== palavraInv.join("")) {
@@ -156,7 +158,6 @@ const exercicio8 = () => {
 const exercicio9 = () => {
   let resposta = document.getElementById("resposta");
   let m = 0;
-
   for (let i = 1; i <= 100; i++) {
     resposta.innerText = `A soma de todos os números de um a 100 é igual ${(m +=
       i)}`;
@@ -173,8 +174,8 @@ const exercicio10 = () => {
 
   if (numero > 0) {
     erro.innerText = ""
-    while (i <= numero) {
-      let soma = (m += i);
+    while (i <= numero) {//Vai repetir até o i ultrapassar o numero
+      let soma = (m += i);//Vai salvar os números do i, e os somará
       let media = soma / numero;
       resultado.innerHTML = `<h3>A soma dos números até o ${numero} é ${soma}, e a média dessa soma é igual a ${media}</h3>`;
       i++;
@@ -188,9 +189,8 @@ const exercicio10 = () => {
 //Atividade 11
 const exercicio11 = () => {
   let resposta = document.getElementById("resposta");
-  let m = 0;
 
-  for (let i = 1; i <= 100; i++) {
+  for (let i = 1; i <= 100; i++) {//Muda por quem será multiplicado o 3
     resposta.innerHTML += `<h3>3 X ${i} = ${(3*i)}</h3>`;
   }
 };
@@ -287,6 +287,7 @@ const exercicio15 = () => {
   let erro = document.getElementById("erro");
   let vogal = [`a`,`e`,`i`,`o`,`u`];
   let consoante = [`b`, `c`,`d`,`f`,`g`,`h`,`j`,`k`,`l`,`m`,`n`,`p`,`q`,`r`,`s`,`t`,`v`,`w`,`x`,`y`,`z`,]
+  //Eu achei que ficou muito feio fazer isso de definir vogal e consoante, mas como eu não sei outro jeito, foi o que deu
 palavra = palavra.toLowerCase();
 
   if(palavra == ""){
@@ -295,12 +296,12 @@ palavra = palavra.toLowerCase();
     erro.innerText = "";
     for (let i = 0; i <= palavra.length; i++) {
       for (let z = 0; z <= vogal.length; z++) {
-        if(palavra.charAt(i) == vogal[z]){
-      resultado.innerText += `|vogal = ${palavra.charAt(i)} `
+        if(palavra.charAt(i) == vogal[z]){//Compara se um caractere específico da palavra é igual ao caractere atual da vogal
+      resultado.innerText += `|vogal = ${palavra.charAt(i)} `//E se for, vai mostrar o caractere específico
         } 
       }
       for (let y = 0; y < consoante.length; y++) {
-      if(palavra.charAt(i) == consoante[y]){
+      if(palavra.charAt(i) == consoante[y]){//Mesma coisa para consoante
       erro.innerText += `|consoante = ${palavra.charAt(i)} `
       }
       
