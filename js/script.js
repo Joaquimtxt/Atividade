@@ -2,7 +2,7 @@
 const exercicio1 = () => {
   document.getElementById("resposta").innerHTML = ``;
 
-  for (let i = 1; i <= 10; i++) {
+  for (let i = 1; i <= 10; i++) { //Vai repetir até chegar no 10
     document.getElementById("resposta").innerHTML += `<h3> # ${i}  </h3>`;
   }
 };
@@ -19,7 +19,7 @@ const exercicio2 = () => {
     error.style.display = "block";
     error.innerHTML = "Erro: Informe números positivos e diferentes de zero";
   } else
-    for (let n = 0; n <= numero.value; n += 2) {
+    for (let n = 0; n <= numero.value; n += 2) {//Vai somar 2, e mostrar o valor de n até passar o numero.value
       resultado.innerHTML += `<h3> # ${n} </h3>`;
     }
 };
@@ -64,7 +64,7 @@ const exercicio4 = () => {
     erro.innerText = "Informe um positivo e diferente de 0!";
     resultado.innerText = "";
   } else {
-    for (let x = 1; x <= 10; x++) {
+    for (let x = 1; x <= 10; x++) {//Vai multiplicando pelo x, o x ele a cada repetição aumenta o valor até ele ultrapassar o 10
       resultado.innerHTML += `<h3> #${numero} X ${x} = ${numero * x} </h3>`;
       erro.innerText = "";
     }
@@ -218,6 +218,21 @@ if(valor<=0){
 }
 
 //Atividade 13
+const verificaPrimo = (numero) => {
+  if (numero <=1){
+    return false
+  }
+  
+  let primo = true;
+  for (let m = 2; m * m <= numero; m++) { //Se encontrarmos um divisor maior que a raiz quadrada de um número, 
+    //podemos concluir que ele não é primo, o uso da raiz quadrada nessa situação nos permite englobar o 2
+    if (numero % m === 0) {
+      primo = false;
+      break
+    }
+  }
+  return primo;
+};
 const exercicio13 = () => {
   let resultado = document.getElementById("resultado");
   resultado.innerHTML = "";
@@ -228,31 +243,22 @@ const exercicio13 = () => {
   let max = document.getElementById("num2").value;
   max = Math.round(max);
 
-  const numEntre = [];
-
   let erro = document.getElementById("erro");
 
-  if (min < 0 || max <=0 || min >= max) {
-    erro.innerText = "Erro: Favor informar um número positivo e diferente do outro número colocado";
+  if (min < 0 || max <= 0 || min >= max) {
+    erro.innerText =
+      "Erro: Favor informar um número positivo e diferente do outro número colocado";
     resultado.innerText = "";
   } else {
-    let primo = true;
-    
-    
-    for (let m = 2; m <= max; m++) {
-    for (let i = min; i <= max; i++) {
-
-    if(i % m == 0 || i == 1)primo = false;
-    else{
-      numEntre.push(i);
+    for (let m = min; m <= max; m++) {
+      let numEntre = verificaPrimo(m);
+      if (numEntre) {
+        resultado.innerHTML += `<h3>#${m}</h3>`;
       }
     }
   }
-    
-    console.log(numEntre)
-  }
-      
-    }
+};
+
 
 //Atividade 14
 const exercicio14 = () => {
@@ -358,34 +364,22 @@ const exercicio18 = () => {
 
 //Atividade 19
 const exercicio19 = () => {
-  let na = document.getElementById("data").value;
- let dataNasc = new Date(document.getElementById("data").value)
- let resultado = document.getElementById("resultado")
- resultado = "";
-
+  let userData = document.getElementById("data").value;
+  let resultado = document.getElementById("resultado");
   let erro = document.getElementById("erro");
-let dataAtual = new Date()
+  let dataAtual = new Date();
+  let dataNasc = new Date(userData);
+  let diferenca = dataAtual - dataNasc;
+  const idade = Math.floor(diferenca / (1000 * 60 * 60 * 24 * 365.25)); //milisegundos*segundos*minutos*horas*dias respectivamente
 
-let anoN = dataNasc.getFullYear()
-let mesN = dataNasc.getMonth()
-let diaN = dataNasc.getDate()
-
-
-let anoA = dataAtual.getFullYear()
-let mesA = dataNasc.getMonth()
-let diaA = dataNasc.getDate()
-
-if (na == ""){
-  erro.innerText = "Coloque a data!"
-} else{
-  erro.innerText = ""
-  if(mesN > mesA ||mesN == mesA && diaN >= diaA){
-resultado.innerHTML = `<h3>Sua idade é de ${anoA - anoN} anos!</h3>`
-  }else{
-    resultado.innerHTML = `<h3>Sua idade é de ${anoA - anoN - 1} anos!</h3>`
+  if (userData == "" || diferenca < 0) {
+    erro.innerText = "Coloque uma data válida!";
+    resultado = "";
+  } else {
+    erro.innerText = "";
+    resultado.innerHTML = `<h3>Você tem ${idade} anos!</h3>`;
   }
-}
-}
+};
 
 //Atividade 20
 const exercicio20 = () => {
@@ -430,7 +424,25 @@ const exercicio21 = () => {
 }
 
 //Atividade 22
+var soma22 = 0;
+const exercicio22 = () =>{
+  let resultado = document.getElementById("resultado");
+  resultado.innerHTML = "";
 
+let num = document.getElementById("num").value*1
+
+  let erro = document.getElementById("erro");
+
+  if(num <= 0 ){
+    erro.innerText = "Coloque números positivos e diferentes de zero!"
+  } else if (soma22<=100){
+    erro.innerText = ""
+    soma22 += num
+    resultado.innerHTML += `<h3>${soma22}</h3>`
+  } else if (soma22 > 100){
+    erro.innerText = "O número passou de 100!"
+  }
+}
 
 //Atividade 23
 const exercicio23 = () => {
@@ -459,32 +471,42 @@ const exercicio23 = () => {
 //Atividade 24
 const exercicio24 = () => {
   let resultado = document.getElementById("resultado");
-  resultado.innerHTML = "";
 
- let valor = document.getElementById("frase").value
-let frase = valor.split(" ")
+  let valor = document.getElementById("frase").value;
+  let frase = valor.split(" ");
+  const primeirasLetras = [];
 
   let erro = document.getElementById("erro");
 
-  if(valor == ""){
-    erro.innerText = "Coloque um título!"
-  } else{
+  if (valor == "") {
+    erro.innerText = "Coloque um título!";
+    resultado.innerHTML = "";
+  } else {
     erro.innerText = "";
-    for (let i = 0; i < valor.length; i++) {
-      const element = array[i];
-      
-    }
+    const fraseMod = frase.map((palavra) => {
+      //Utilizei o map para retornar o array com os transofrmações feitas pela função
+      const firstLetter = palavra[0].toUpperCase(); //Acessa o primeiro caractere da palavra
+      primeirasLetras.push(firstLetter); //Adiciona as letras maiúsculas na array primeirasLetras
+      return firstLetter + palavra.slice(1); // Substituindo a primeira letra pela versão maiúscula
+    });
+    resultado.innerHTML = `<h1>${fraseMod.join(" ")}</h1>`;
   }
-}
+};
 
 //Atividade 25
 const exercicio25 = () => {
   let resultado = document.getElementById("resultado");
   resultado.innerHTML = "";
 
-let num1 = document.getElementById("num1").value*1
-let num2 = document.getElementById("num2").value*1
-let num3 = document.getElementById("num3").value*1
+let num1 = document.getElementById("num1").value
+let num2 = document.getElementById("num2").value
+let num3 = document.getElementById("num3").value
+
+let numeros = []
+numeros.push(num1);
+numeros.push(num2);
+numeros.push(num3);
+numeros.sort((a,b) => a - b);
 
   let erro = document.getElementById("erro");
 
@@ -492,5 +514,9 @@ let num3 = document.getElementById("num3").value*1
     erro.innerText = "Preencha os campos vazios!"
   } else{
     erro.innerText = ""
+for (let i = 0; i <= 2; i++) {
+  resultado.innerHTML += `<h3> #${numeros[i]}</h3>`;
+  
+}
   }
 }
